@@ -27,7 +27,7 @@ public class MenuController {
         log.info("service start .......");
         RunOob runOob = springRoadService.findRunOobUser(1);
         log.info("result:{}", runOob);
-        return "howMenu";
+        return "helloMenu";
     }
 }
 
