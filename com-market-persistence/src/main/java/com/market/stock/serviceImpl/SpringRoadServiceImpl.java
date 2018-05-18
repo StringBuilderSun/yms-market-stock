@@ -13,6 +13,8 @@ import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 /**
  * @author lijinpeng
  * @version Id: SpringRoadService.java, v 0.1 2018/5/16 19:51 lijinpeng Exp $$
@@ -23,7 +25,7 @@ public class SpringRoadServiceImpl implements SpringRoadService {
     @Autowired
     private RunOobDao runOobDao;
     public RunOob findRunOobUser(Integer runId) {
-        MDC.put(AlivnMarker.TRACE_LOG_ID, "1111111111111");
+        MDC.put(AlivnMarker.TRACE_LOG_ID, UUID.randomUUID().toString());
         log.info("start to find RunOob,runId:{}", runId);
         return runOobDao.findRunOobByRunId(runId);
     }
