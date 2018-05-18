@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.market.stock.mapper.RunOobMapper">
+    <resultMap id="resultMap" type="com.market.stock.model.RunOob">
+        <id column="runoob_id" property="runId" jdbcType="INTEGER"/>
+        <result column="runoob_title" property="runTitle" jdbcType="VARCHAR"/>
+        <result column="runoob_author" property="runTitle" jdbcType="VARCHAR"/>
+        <result column="submission_date" property="runDate" jdbcType="DATE"/>
+    </resultMap>
+    <sql id="select_column">
+        runoob_id,runoob_title,runoob_author,submission_date
+    </sql>
+    <select id="findRunOobByRunId"   resultMap="resultMap">
+        select
+        <include refid="select_column"/>
+        from runoob_tbl where 1=1
+        <if test="runId!=null"/>
+        and runoob_id=${runId}
+    </select>
+</mapper>
