@@ -15,6 +15,14 @@
         <groupId>com.yms.market</groupId>
         <artifactId>com.market.facade</artifactId>
     </dependency>
+    <dependency>
+        <groupId>com.yms.market</groupId>
+        <artifactId>com.market.persistence</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.yms.market</groupId>
+        <artifactId>com.market.common</artifactId>
+    </dependency>
 </dependencies>
 
 </project>

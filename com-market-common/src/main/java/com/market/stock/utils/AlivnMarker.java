@@ -5,35 +5,30 @@
 package com.market.stock.utils;
 
 import org.slf4j.Marker;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 /**
  * @author lijinpeng
  * @version Id: AlivnMarker.java, v 0.1 2018/5/16 20:05 lijinpeng Exp $$
  */
 public class AlivnMarker implements Marker {
     private static final long serialVersionUID = -1387951413362902419L;
-    public static final String BESTPAY_MARKER_NAME = "bestpay_marker";
+    public static final String BESTPAY_MARKER_NAME = "yms-system";
     /**
      * 日志跟踪id
      */
     public static String TRACE_LOG_ID = "TRACE_LOG_ID";
-    /**
-     * 其他信息
-     */
-    public static String OTHER_MSG = "OTHER_MSG";
-    Map<MarkerKey, String> bestpayMarkers;
+
+    Map<MarkerKey, String> ymsMakers;
 
     AlivnMarker(MarkerKey markerKey, String value) {
         this(new MarkerKey[] { markerKey }, new String[] { value });
     }
 
     AlivnMarker(MarkerKey[] markerKeys, String[] values) {
-        bestpayMarkers = new HashMap<AlivnMarker.MarkerKey, String>(markerKeys.length);
+        ymsMakers = new HashMap<AlivnMarker.MarkerKey, String>(markerKeys.length);
         String[] newValues = values;
         if (values.length < markerKeys.length) {
             newValues = new String[markerKeys.length];
@@ -41,7 +36,7 @@ public class AlivnMarker implements Marker {
             Arrays.fill(newValues, values.length, markerKeys.length, "");
         }
         for (int i = 0; i < markerKeys.length; i++) {
-            bestpayMarkers.put(markerKeys[i], newValues[i]);
+            ymsMakers.put(markerKeys[i], newValues[i]);
         }
     }
 
@@ -53,21 +48,21 @@ public class AlivnMarker implements Marker {
             Arrays.fill(newValues, values.length, markerKeys.length, "");
         }
         for (int i = 0; i < markerKeys.length; i++) {
-            bestpayMarkers.put(markerKeys[i], newValues[i]);
+            ymsMakers.put(markerKeys[i], newValues[i]);
         }
     }
 
-    public Map<MarkerKey, String> getBestpayMarkers() {
-        return bestpayMarkers;
+    public Map<MarkerKey, String> getymsMarkers() {
+        return ymsMakers;
     }
 
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer(80);
-        Iterator<MarkerKey> ite = bestpayMarkers.keySet().iterator();
+        Iterator<MarkerKey> ite = ymsMakers.keySet().iterator();
         while (ite.hasNext()) {
             MarkerKey key = ite.next();
-            sb.append("\"").append(key).append("\":\"").append(bestpayMarkers.get(key)).append("\"");
+            sb.append("\"").append(key).append("\":\"").append(ymsMakers.get(key)).append("\"");
             if (ite.hasNext()) {
                 sb.append(",");
             }

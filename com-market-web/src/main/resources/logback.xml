@@ -4,31 +4,36 @@
 		<encoder charset="utf-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
 			<!-- %.-1level 只显示信息级别的首字母,%-5level 左对齐显示信息级别全称 -->
 			<!-- 如需自定义关键字，用 %mdc{键名} 表示,程序中用MDC.put("键名","键值")设置，可动态设置 [%logger:%line]-->
-			<Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level][%C{40}][%line][%M] --%mdc{client} [%X{TRACE_LOG_ID}] %msg%n</Pattern>
-		</encoder>>
+			<!--<Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level][%C{40}][%line][%M] &#45;&#45;%mdc{client} [%X{TRACE_LOG_ID}]-->
+			<Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level][%C{40}][%line][%M][%X{TRACE_LOG_ID}]%msg%n</Pattern>
+		</encoder>
 	</appender>
 
 	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--过滤器-->
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>${logger.logLevel}</level>
+			<!--过滤logger.logLevel级别的日志-->
+			<level>INFO</level>
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<File>${logger.logback.logpath}/webgate-outerbank.log</File>
+		<File>d:/mylogs/yms-market-stock.log</File>
 		<encoder>
 			<Pattern>[%date] [%-5level][%C{40}][%line][%M] --%mdc{client} [%X{TRACE_LOG_ID}] %msg%n</Pattern>
 			<charset>UTF-8</charset>
 		</encoder>
 		<!-- 配置滚动的策略 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${logger.logback.logpath}/webgate-outerbank.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!--按天回滚-->
+			<fileNamePattern>d:/mylogs/yms-market-stock.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!--保留最大日志历史纪录为30天-->
 			<maxHistory>30</maxHistory>
 			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>512MB</maxFileSize>
+				<!--单条日志最大容量-->
+				<maxFileSize>2KB</maxFileSize>
 			</TimeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 	</appender>
-
 	<!-- 异步输出 -->
 	<appender name ="asyncFile" class= "ch.qos.logback.classic.AsyncAppender">
 		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
@@ -39,11 +44,6 @@
 		<!-- 添加附加的appender,最多只能添加一个 -->
 		<appender-ref ref ="logfile"/>
 	</appender>
-
-	<root level="INFO">
-		<appender-ref ref="asyncFile" />
-	</root>
-
 	<logger name="com.ibatis" level="${logger.outside.logLevel}"/>
 	<logger name="org.springframework" level="${logger.outside.logLevel}"/>
 	<logger name="java.sql.PreparedStatement" level="${logger.outside.logLevel}"/>
@@ -60,8 +60,9 @@
 	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="${logger.outside.logLevel}"/>
 	<logger name="org.jdbcdslog" level="${logger.outside.logLevel}" />
 
-	<logger name="com.bestpay.tradeprod" level="${logger.logLevel}" >
-		<appender-ref ref="logfile"/>
+	<logger name="com.market.stock" level="${logger.logLevel}" >
+		<!--该包名下的日志会异步打印-->
+		<appender-ref ref="asyncFile"/>
 	</logger>
 
 	<!-- 输出到控制台和文件，可定义更多的 Appender -->

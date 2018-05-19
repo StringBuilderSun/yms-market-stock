@@ -40,9 +40,7 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-
     <!-- MyBatis配置 -->
     <!-- 配置SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

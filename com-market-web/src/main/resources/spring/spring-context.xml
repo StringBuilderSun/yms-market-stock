@@ -14,13 +14,7 @@
 	  http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-lazy-init="true">
     <context:property-placeholder location="classpath*:app-env.properties"/>
-    <context:component-scan base-package="com.market.stock"/>
-    <!--<bean id="app" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
-        <!--<property name="locations">-->
-            <!--<list>-->
-                <!--<value>classpath:app-env.properties</value>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
+
+
     <import resource="spring-datasource.xml"/>
 </beans>
