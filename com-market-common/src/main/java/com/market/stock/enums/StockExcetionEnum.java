@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum StockExcetionEnum {
-    TABLE_NOTEXIT("SYS999999", "数据库中不存在此表");
+    TABLE_NOTEXIT("SYS999999", "数据库中不存在此表"),
+    REQUESTtYPE_ISNULL("SYS999996", "requestType is not null"),
+    TABLE_ISNULL("SYS999998", "tablesEnum is not null"),
+    MAPPER_NOTEXIT("SYS999997", "mapper is null");
     private String errorCode;
     private String errorMsg;
 

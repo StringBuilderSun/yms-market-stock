@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @author lijinpeng
  * @version Id: RunOobMapper.java, v 0.1 2018/5/16 18:50 lijinpeng Exp $$
  */
-public interface RunOobMapper {
-     RunOob findRunOobByRunId(@Param("runId") Integer runId);
+public interface RunOobMapper extends BaseMapper<RunOob> {
+
+      RunOob querySingleService(RunOob runOob);
 }

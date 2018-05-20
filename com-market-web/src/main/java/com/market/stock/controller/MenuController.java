@@ -8,6 +8,7 @@ import com.market.stock.enums.RequestType;
 import com.market.stock.enums.TablesEnum;
 import com.market.stock.model.RunOob;
 import com.market.stock.model.StockManagerRequest;
+import com.market.stock.model.StockManagerResponse;
 import com.market.stock.service.StockManagerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +24,18 @@ import java.util.UUID;
 @Slf4j
 @Controller
 public class MenuController {
-0
     @Autowired
     private StockManagerService stockManagerService;
 
     @RequestMapping(value = "/start")
     public String showMenu() {
-        log.info("service start .......");
-        StockManagerRequest<RunOob> request = new StockManagerRequest<RunOob>();
-        RunOob runOob = new RunOob();
-        runOob.setRunAuthor("李金鹏");
-        runOob.setRunId(22);
-        runOob.setRunTitle("测试来了");
+        StockManagerRequest request = new StockManagerRequest();
+        RunOob runOob=new RunOob();
+        runOob.setRunId(1);
         request.setDataModel(runOob);
         request.setRequestType(RequestType.SingleQuery);
         request.setTablesEnum(TablesEnum.USER_TABLE);
-        stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
-        log.info("result:{}", runOob);
+       StockManagerResponse response= stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
         return "helloMenu";
     }
 }

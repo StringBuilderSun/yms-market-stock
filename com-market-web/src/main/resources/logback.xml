@@ -30,7 +30,7 @@
 			<maxHistory>30</maxHistory>
 			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<!--单条日志最大容量-->
-				<maxFileSize>2KB</maxFileSize>
+				<maxFileSize>2MB</maxFileSize>
 			</TimeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 	</appender>

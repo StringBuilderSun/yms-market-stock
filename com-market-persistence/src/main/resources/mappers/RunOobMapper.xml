@@ -10,7 +10,7 @@
     <sql id="select_column">
         runoob_id,runoob_title,runoob_author,submission_date
     </sql>
-    <select id="findRunOobByRunId"   resultMap="resultMap">
+    <select id="querySingleService"  resultMap="resultMap">
         select
         <include refid="select_column"/>
         from runoob_tbl where 1=1

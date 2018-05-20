@@ -14,8 +14,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class StockBaseRequest implements Serializable {
+public class StockBaseRequest<T> implements Serializable {
     private static final long serialVersionUID = 7467597467519190913L;
+    /**
+     * 操作的数据源
+     */
+    private T dataModel;
     /**
      * 要操作的表类型
      */

@@ -5,9 +5,13 @@ package com.market.stock.enums;
  */
 public enum RequestType {
     /**
-     * 查询
+     * 单笔查询
      */
     SingleQuery,
+    /**
+     * 列表查询
+     */
+    ListQuery,
     /**
      * 新增
      */

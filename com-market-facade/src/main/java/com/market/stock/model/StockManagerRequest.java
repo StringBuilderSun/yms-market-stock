@@ -13,12 +13,7 @@ import java.sql.Date;
  */
 @Setter
 @Getter
-@ToString
-public class StockManagerRequest<T> extends StockBaseRequest {
-    /**
-     * 操作的数据源
-     */
-    private T dataModel;
+public class StockManagerRequest extends StockBaseRequest {
     /**
      * 操作人
      */
@@ -27,4 +22,12 @@ public class StockManagerRequest<T> extends StockBaseRequest {
      * 操作时间
      */
     private Date operatorTime;
+
+    public String ToString()
+    {
+        StringBuilder sb=new StringBuilder();
+        sb.append(super.toString());
+        sb.append("operator:").append(this.operator).append("operatorTime:").append(this.operatorTime);
+        return sb.toString();
+    }
 }
