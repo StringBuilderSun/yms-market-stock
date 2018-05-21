@@ -6,10 +6,13 @@ import com.market.stock.enums.TablesEnum;
 import com.market.stock.exception.StockException;
 import com.market.stock.mapper.BaseMapper;
 import com.market.stock.mapper.RunOobMapper;
+import com.market.stock.mapper.UserMapper;
 import com.market.stock.model.StockBaseRequest;
+import com.market.stock.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
@@ -20,7 +23,8 @@ import org.springframework.util.StringUtils;
 public class MapperAdapter {
     @Autowired
     private RunOobMapper runOobMapper;
-
+    @Autowired
+    private UserMapper userMapper;
     /**
      * 获取mapper 接口
      *
@@ -37,7 +41,7 @@ public class MapperAdapter {
         }
         switch (tablesEnum) {
             case USER_TABLE:
-                mapper = runOobMapper;
+                mapper =userMapper ;
                 break;
             default:
                 mapper = null;
@@ -48,11 +52,13 @@ public class MapperAdapter {
 
     /**
      * 获取操作结果
+     * 使用注解式事务  默认使用 数据库默认的
      *
      * @param request 请求model
      * @param <T>     操作结果
      * @return
      */
+    @Transactional
     public <T> T getResult(StockBaseRequest request) {
         log.info("操作表:{} 请求类型:{}", request.getTablesEnum(), request.getRequestType());
         BaseMapper mapper = getMapper(request);
@@ -68,6 +74,8 @@ public class MapperAdapter {
         switch (requestType) {
             case SingleQuery:
                 return (T) mapper.querySingleService(request.getDataModel());
+            case INSERT:
+                return (T) mapper.addService(request.getDataModel());
         }
         return null;
     }

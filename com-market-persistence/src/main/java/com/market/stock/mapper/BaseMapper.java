@@ -8,7 +8,7 @@ public interface BaseMapper<D>{
     /**
      * 新增操作
      * @param data
-     * @param <T>
+     * @param
      * @return
      */
     <T> T addService(D data);

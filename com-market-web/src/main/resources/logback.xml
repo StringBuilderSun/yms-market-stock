@@ -19,7 +19,7 @@
 		</filter>
 		<File>d:/mylogs/yms-market-stock.log</File>
 		<encoder>
-			<Pattern>[%date] [%-5level][%C{40}][%line][%M] --%mdc{client} [%X{TRACE_LOG_ID}] %msg%n</Pattern>
+			<Pattern>[%date{yyyy-MM-dd HH:mm:ss}][%-5level][%C{40}][%line][%M] --%mdc{client} [%X{TRACE_LOG_ID}] %msg%n</Pattern>
 			<charset>UTF-8</charset>
 		</encoder>
 		<!-- 配置滚动的策略 -->

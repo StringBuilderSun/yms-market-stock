@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.market.stock.mapper.UserMapper">
+    <resultMap id="resultMap" type="com.market.stock.model.User">
+        <id column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="uname" property="uname" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="BIT"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="userLevel" property="user_level" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="updatedBy" property="updated_by" jdbcType="VARCHAR"/>
+        <result column="updatedAt" property="updated_at" jdbcType="DATE"/>
+        <result column="createdAt" property="created_at" jdbcType="DATE"/>
+        <result column="createdBy" property="created_by" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="select_column">
+     uname,sex,phone,city,email,user_level,remark,updated_by,updated_at,created_at,created_by
+    </sql>
+    <insert id="addService">
+        insert into yms_user_info (<include refid="select_column"/>)
+        values(
+        #{uname,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR},
+        #{city,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{userLevel,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR},
+        #{updatedBy,jdbcType=VARCHAR},
+        #{updatedAt,jdbcType=DATE},
+        #{createdAt,jdbcType=DATE},
+        #{createdBy,jdbcType=VARCHAR}
+        );
+    </insert>
+</mapper>
