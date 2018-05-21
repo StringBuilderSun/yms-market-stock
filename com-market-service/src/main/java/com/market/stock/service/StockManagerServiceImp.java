@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * Created by Administrator on 2018/5/20.
  */
@@ -18,15 +20,13 @@ public class StockManagerServiceImp implements StockManagerService {
 
     @Autowired
     private MapperAdapter mapperAdapter;
-
     public StockManagerResponse StockDataBaseService(StockManagerRequest requestModel, String traceLogId) {
         MDC.put(AlivnMarker.TRACE_LOG_ID, traceLogId);
         log.info("服务调用请求:{}", requestModel);
-        Object result = mapperAdapter.getResult(requestModel);
         StockManagerResponse response = new StockManagerResponse();
+        response.setResponseModel(mapperAdapter.getResult(requestModel));
         response.setResponseDesc("处理成功");
         response.setResponseCode("000000");
-        response.setResponseModel(result);
         response.setResult(true);
         log.info("服务调用响应:{}", response);
         return response;

@@ -18,7 +18,7 @@
     <sql id="select_column">
      uname,sex,phone,city,email,user_level,remark,updated_by,updated_at,created_at,created_by
     </sql>
-    <insert id="addService">
+    <insert id="addService" >
         insert into yms_user_info (<include refid="select_column"/>)
         values(
         #{uname,jdbcType=VARCHAR},

@@ -25,6 +25,7 @@ public class MapperAdapter {
     private RunOobMapper runOobMapper;
     @Autowired
     private UserMapper userMapper;
+
     /**
      * 获取mapper 接口
      *
@@ -41,7 +42,7 @@ public class MapperAdapter {
         }
         switch (tablesEnum) {
             case USER_TABLE:
-                mapper =userMapper ;
+                mapper = userMapper;
                 break;
             default:
                 mapper = null;
@@ -55,7 +56,7 @@ public class MapperAdapter {
      * 使用注解式事务  默认使用 数据库默认的
      *
      * @param request 请求model
-     * @param <T>     操作结果
+     * @param <T>    操作结果
      * @return
      */
     @Transactional
@@ -75,7 +76,9 @@ public class MapperAdapter {
             case SingleQuery:
                 return (T) mapper.querySingleService(request.getDataModel());
             case INSERT:
-                return (T) mapper.addService(request.getDataModel());
+                //由于mysql默认返回的int，int又不是引用类型 无法用泛型，所以需要转换一下
+                Integer result = mapper.addService(request.getDataModel());
+                return (T) result;
         }
         return null;
     }

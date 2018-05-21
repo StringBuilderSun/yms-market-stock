@@ -11,7 +11,7 @@ public interface BaseMapper<D>{
      * @param
      * @return
      */
-    <T> T addService(D data);
+    Integer addService(D data);
 
     /**
      * 单个查询操作
