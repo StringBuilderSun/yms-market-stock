@@ -12,10 +12,7 @@ public enum RequestType {
      * 列表查询
      */
     ListQuery,
-    /**
-     * 新增
-     */
-    ADD,
+
     /**
      * 插入
      */
@@ -23,5 +20,9 @@ public enum RequestType {
     /**
      * 修改
      */
-    DELETE
+    DELETE,
+    /**
+     * 更新
+     */
+    UPDATE
 }

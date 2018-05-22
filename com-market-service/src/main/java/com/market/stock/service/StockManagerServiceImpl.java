@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Slf4j
 @Service
-public class StockManagerServiceImp implements StockManagerService {
+public class StockManagerServiceImpl implements StockManagerService {
 
     @Autowired
     private MapperAdapter mapperAdapter;

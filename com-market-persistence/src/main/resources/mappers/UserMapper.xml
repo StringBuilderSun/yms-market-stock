@@ -20,11 +20,55 @@
     </sql>
 
     <select id="singleQueryByPrimaryKeyService" resultType="com.market.stock.model.User">
-        select uid,<include refid="base_column"/>
+        select uid,
+        <include refid="base_column"/>
         from yms_user_info where uid=#{uid}
     </select>
-    <insert id="addService" >
-        insert into yms_user_info (<include refid="select_column"/>)
+    <select id="queryListService">
+        select uid,
+        <include refid="base_column"/>
+        from yms_user_info
+        <where>
+            <if test="uid !=null and uid !=''">
+                uid=#{uid},
+            </if>
+            <if test="uname !=null and uname!=''">
+                uname=#{uname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex !=null and sex != ''">
+                sex=#{sex jdbcType=BIT},
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone=#{phone},
+            </if>
+            <if test="city !=null and city !=''">
+                city=#{city},
+            </if>
+            <if test="email !=null and email !=''">
+                email=#{email},
+            </if>
+            <if test="userLevel !=null and userLevel !=''">
+                user_level=#{userLevel},
+            </if>
+            <if test="remark !=null and remark !=''">
+                remark=#{remark},
+            </if>
+            <if test="updatedBy !=null and updatedBy !=''">
+                updated_by=#{updatedBy},
+            </if>
+            <if test="updatedAt !=null and updatedAt !=''">
+                updated_at=#{updatedAt},
+            </if>
+            <if test="createdAt !=null and createdAt !=''">
+                created_at=#{createdAt},
+            </if>
+            <if test="createdBy !=null and createdBy !=''">
+                created_by=#{createdBy}
+            </if>
+        </where>
+    </select>
+    <insert id="addService">
+        insert into yms_user_info (<include refid="base_column"/>)
         values(
         #{uname,jdbcType=VARCHAR},
         #{sex,jdbcType=BIT},
@@ -40,42 +84,48 @@
         );
     </insert>
     <update id="updateService">
-        UPDATE  yms_user_info
+        UPDATE yms_user_info
         <set>
+
             <if test="uname !=null and uname!=''">
                 uname=#{uname,jdbcType=VARCHAR},
             </if>
             <if test="sex !=null and sex != ''">
-                sex=#{sex jdbcType=BIT}
+                sex=#{sex jdbcType=BIT},
             </if>
             <if test="phone !=null and phone !=''">
-                phone=#{phone}
+                phone=#{phone},
             </if>
             <if test="city !=null and city !=''">
-                city=#{city}
+                city=#{city},
             </if>
             <if test="email !=null and email !=''">
-                email=#{email}
+                email=#{email},
             </if>
             <if test="userLevel !=null and userLevel !=''">
-                user_level=#{userLevel}
+                user_level=#{userLevel},
             </if>
             <if test="remark !=null and remark !=''">
-                remark=#{remark}
+                remark=#{remark},
             </if>
             <if test="updatedBy !=null and updatedBy !=''">
-                updated_by=#{updatedBy}
+                updated_by=#{updatedBy},
             </if>
             <if test="updatedAt !=null and updatedAt !=''">
-                updated_at=#{updatedAt}
+                updated_at=#{updatedAt},
             </if>
             <if test="createdAt !=null and createdAt !=''">
-            created_at=#{createdAt}
-        </if>
+                created_at=#{createdAt},
+            </if>
             <if test="createdBy !=null and createdBy !=''">
                 created_by=#{createdBy}
             </if>
         </set>
+        where uid=#{uid}
     </update>
+    <delete id="deleteService">
+        DELETE  from yms_user_info  where uid=#{uid}
+    </delete>
+
 
 </mapper>

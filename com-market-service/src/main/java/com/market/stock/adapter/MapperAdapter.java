@@ -5,10 +5,8 @@ import com.market.stock.enums.StockExcetionEnum;
 import com.market.stock.enums.TablesEnum;
 import com.market.stock.exception.StockException;
 import com.market.stock.mapper.BaseMapper;
-import com.market.stock.mapper.RunOobMapper;
 import com.market.stock.mapper.UserMapper;
 import com.market.stock.model.StockBaseRequest;
-import com.market.stock.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +19,6 @@ import org.springframework.util.StringUtils;
 @Slf4j
 @Service
 public class MapperAdapter {
-    @Autowired
-    private RunOobMapper runOobMapper;
     @Autowired
     private UserMapper userMapper;
 
@@ -60,6 +56,7 @@ public class MapperAdapter {
      * @return
      */
     @Transactional
+    //目前事务存在无效性
     public <T> T getResult(StockBaseRequest request) {
         log.info("操作表:{} 请求类型:{}", request.getTablesEnum(), request.getRequestType());
         BaseMapper mapper = getMapper(request);
@@ -70,16 +67,26 @@ public class MapperAdapter {
         RequestType requestType = request.getRequestType();
         if (StringUtils.isEmpty(request)) {
             log.error("requestType 不能为null! 输入值:{}", requestType);
-            throw new StockException(StockExcetionEnum.REQUESTtYPE_ISNULL);
+            throw new StockException(StockExcetionEnum.REQUES_TYPE_ISNULL);
         }
         switch (requestType) {
             case SingleQuery:
-                return (T) mapper.querySingleService(request.getDataModel());
+                return (T) mapper.singleQueryByPrimaryKeyService(request.getDataModel());
+            case ListQuery:
+                return (T) mapper.queryListService(request.getDataModel());
             case INSERT:
                 //由于mysql默认返回的int，int又不是引用类型 无法用泛型，所以需要转换一下
-                Integer result = Integer.valueOf(mapper.addService(request.getDataModel()));
-                return (T) result;
+                Integer insert_result = Integer.valueOf(mapper.addService(request.getDataModel()));
+                return (T) insert_result;
+            case DELETE:
+                Integer delete_result = Integer.valueOf(mapper.deleteService(request.getDataModel()));
+                return (T) delete_result;
+            case UPDATE:
+                Integer update_result = Integer.valueOf(mapper.updateService(request.getDataModel()));
+                return (T) update_result;
+            default:
+                throw new StockException(StockExcetionEnum.REQUES_TYPE_ISEXIT);
+
         }
-        return null;
     }
 }

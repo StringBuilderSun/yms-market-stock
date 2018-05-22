@@ -6,8 +6,6 @@ package com.market.stock.controller;
 
 import com.market.stock.enums.RequestType;
 import com.market.stock.enums.TablesEnum;
-import com.market.stock.mapper.UserMapper;
-import com.market.stock.model.RunOob;
 import com.market.stock.model.StockManagerRequest;
 import com.market.stock.model.StockManagerResponse;
 import com.market.stock.model.User;
@@ -18,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,22 +28,9 @@ import java.util.UUID;
 public class MenuController {
     @Autowired
     private StockManagerService stockManagerService;
-    @Autowired
-    private UserMapper userMapper;
 
-    //    @RequestMapping(value = "/start")
-//    public String showMenu() {
-//        StockManagerRequest request = new StockManagerRequest();
-//        RunOob runOob=new RunOob();
-//        runOob.setRunId(1);
-//        request.setDataModel(runOob);
-//        request.setRequestType(RequestType.SingleQuery);
-//        request.setTablesEnum(TablesEnum.USER_TABLE);
-//       StockManagerResponse response= stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
-//        return "helloMenu";
-//    }
-    @RequestMapping(value = "/start")
-    public String showMenu() {
+    @RequestMapping(value = "/add")
+    public String addService() {
         StockManagerRequest request = new StockManagerRequest();
         User user = new User();
         user.setCity("上海");
@@ -59,6 +45,64 @@ public class MenuController {
         user.setPhone("18939573486");
         request.setDataModel(user);
         request.setRequestType(RequestType.INSERT);
+        request.setTablesEnum(TablesEnum.USER_TABLE);
+        StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        return "helloMenu";
+    }
+
+    @RequestMapping(value = "/singleQuerg")
+    public String selectSingleService() {
+        StockManagerRequest request = new StockManagerRequest();
+        User user = new User();
+        user.setUid(8);
+        request.setDataModel(user);
+        request.setRequestType(RequestType.SingleQuery);
+        request.setTablesEnum(TablesEnum.USER_TABLE);
+        StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        return "helloMenu";
+    }
+
+    @RequestMapping(value = "/queryList")
+    public String showMenu() {
+        StockManagerRequest request = new StockManagerRequest();
+        User user = new User();
+        request.setDataModel(user);
+        request.setRequestType(RequestType.ListQuery);
+        request.setTablesEnum(TablesEnum.USER_TABLE);
+        StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        List<User> list= (List<User>) response.getResponseModel();
+        log.info("查询到的结果数量:{}",list.size());
+        return "helloMenu";
+    }
+
+    @RequestMapping(value = "/update")
+    public String updateService() {
+        StockManagerRequest request = new StockManagerRequest();
+        User user = new User();
+        user.setUid(9);
+        user.setCity("上海");
+        user.setCreatedAt(new Date());
+        user.setCreatedBy("萧何111");
+        user.setUpdatedAt(new Date());
+        user.setUpdatedBy("李金鹏");
+        user.setEmail("957143334@qq.com");
+        user.setRemark("备注啦");
+        user.setUname("王小飞11");
+        user.setUserLevel("00");
+        user.setPhone("18636853487");
+        request.setDataModel(user);
+        request.setRequestType(RequestType.UPDATE);
+        request.setTablesEnum(TablesEnum.USER_TABLE);
+        StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        return "helloMenu";
+    }
+    @RequestMapping(value = "/del")
+    public String deleteService() {
+        StockManagerRequest request = new StockManagerRequest();
+        User user = new User();
+        user.setUid(11);
+        request.setDataModel(user);
+        request.setRequestType(RequestType.DELETE);
         request.setTablesEnum(TablesEnum.USER_TABLE);
         StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
         return "helloMenu";
