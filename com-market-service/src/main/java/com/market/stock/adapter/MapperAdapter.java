@@ -56,7 +56,7 @@ public class MapperAdapter {
      * 使用注解式事务  默认使用 数据库默认的
      *
      * @param request 请求model
-     * @param <T>    操作结果
+     * @param <T>     操作结果
      * @return
      */
     @Transactional
@@ -77,7 +77,7 @@ public class MapperAdapter {
                 return (T) mapper.querySingleService(request.getDataModel());
             case INSERT:
                 //由于mysql默认返回的int，int又不是引用类型 无法用泛型，所以需要转换一下
-                Integer result = mapper.addService(request.getDataModel());
+                Integer result = Integer.valueOf(mapper.addService(request.getDataModel()));
                 return (T) result;
         }
         return null;

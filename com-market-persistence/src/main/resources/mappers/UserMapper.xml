@@ -3,26 +3,31 @@
 <mapper namespace="com.market.stock.mapper.UserMapper">
     <resultMap id="resultMap" type="com.market.stock.model.User">
         <id column="uid" property="uid" jdbcType="INTEGER"/>
-        <result column="uname" property="uname" jdbcType="VARCHAR"/>
-        <result column="sex" property="sex" jdbcType="BIT"/>
-        <result column="phone" property="phone" jdbcType="VARCHAR"/>
-        <result column="city" property="city" jdbcType="VARCHAR"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="userLevel" property="user_level" jdbcType="VARCHAR"/>
-        <result column="remark" property="remark" jdbcType="VARCHAR"/>
-        <result column="updatedBy" property="updated_by" jdbcType="VARCHAR"/>
-        <result column="updatedAt" property="updated_at" jdbcType="DATE"/>
-        <result column="createdAt" property="created_at" jdbcType="DATE"/>
-        <result column="createdBy" property="created_by" jdbcType="VARCHAR"/>
+        <result property="uname" column="uname" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="BIT"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="userLevel" column="user_level" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="DATE"/>
+        <result property="createdAt" column="created_at" jdbcType="DATE"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
     </resultMap>
-    <sql id="select_column">
+    <sql id="base_column">
      uname,sex,phone,city,email,user_level,remark,updated_by,updated_at,created_at,created_by
     </sql>
+
+    <select id="singleQueryByPrimaryKeyService" resultType="com.market.stock.model.User">
+        select uid,<include refid="base_column"/>
+        from yms_user_info where uid=#{uid}
+    </select>
     <insert id="addService" >
         insert into yms_user_info (<include refid="select_column"/>)
         values(
         #{uname,jdbcType=VARCHAR},
-        #{sex,jdbcType=VARCHAR},
+        #{sex,jdbcType=BIT},
         #{phone,jdbcType=VARCHAR},
         #{city,jdbcType=VARCHAR},
         #{email,jdbcType=VARCHAR},
@@ -34,4 +39,43 @@
         #{createdBy,jdbcType=VARCHAR}
         );
     </insert>
+    <update id="updateService">
+        UPDATE  yms_user_info
+        <set>
+            <if test="uname !=null and uname!=''">
+                uname=#{uname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex !=null and sex != ''">
+                sex=#{sex jdbcType=BIT}
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone=#{phone}
+            </if>
+            <if test="city !=null and city !=''">
+                city=#{city}
+            </if>
+            <if test="email !=null and email !=''">
+                email=#{email}
+            </if>
+            <if test="userLevel !=null and userLevel !=''">
+                user_level=#{userLevel}
+            </if>
+            <if test="remark !=null and remark !=''">
+                remark=#{remark}
+            </if>
+            <if test="updatedBy !=null and updatedBy !=''">
+                updated_by=#{updatedBy}
+            </if>
+            <if test="updatedAt !=null and updatedAt !=''">
+                updated_at=#{updatedAt}
+            </if>
+            <if test="createdAt !=null and createdAt !=''">
+            created_at=#{createdAt}
+        </if>
+            <if test="createdBy !=null and createdBy !=''">
+                created_by=#{createdBy}
+            </if>
+        </set>
+    </update>
+
 </mapper>
