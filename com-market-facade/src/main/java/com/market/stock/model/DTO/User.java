@@ -1,5 +1,6 @@
-package com.market.stock.model;
+package com.market.stock.model.DTO;
 
+import com.market.stock.model.BaseDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class User {
+public class User extends BaseDTO {
     /**
      * 用户id
      */

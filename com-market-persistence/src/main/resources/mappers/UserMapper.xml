@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.market.stock.mapper.UserMapper">
-    <resultMap id="resultMap" type="com.market.stock.model.User">
+    <resultMap id="resultMap" type="com.market.stock.model.DTO.User">
         <id column="uid" property="uid" jdbcType="INTEGER"/>
         <result property="uname" column="uname" jdbcType="VARCHAR"/>
         <result property="sex" column="sex" jdbcType="BIT" javaType="boolean"/>

@@ -1,6 +1,7 @@
 package com.market.stock.mapper;
 
-import com.market.stock.model.User;
+
+import com.market.stock.model.DTO.User;
 
 import java.util.List;
 

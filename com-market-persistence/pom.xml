@@ -12,6 +12,10 @@
     <artifactId>com.market.persistence</artifactId>
     <dependencies>
         <dependency>
+            <groupId>com.yms.market</groupId>
+            <artifactId>com.market.facade</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
         </dependency>
