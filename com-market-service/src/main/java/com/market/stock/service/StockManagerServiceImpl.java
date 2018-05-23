@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 public class StockManagerServiceImpl implements StockManagerService {
-
     @Autowired
     private MapperAdapter mapperAdapter;
+
     public StockManagerResponse StockDataBaseService(StockManagerRequest requestModel, String traceLogId) {
         MDC.put(AlivnMarker.TRACE_LOG_ID, traceLogId);
         log.info("服务调用请求:{}", requestModel);

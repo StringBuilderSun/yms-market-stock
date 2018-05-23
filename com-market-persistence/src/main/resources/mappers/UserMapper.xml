@@ -4,7 +4,7 @@
     <resultMap id="resultMap" type="com.market.stock.model.User">
         <id column="uid" property="uid" jdbcType="INTEGER"/>
         <result property="uname" column="uname" jdbcType="VARCHAR"/>
-        <result property="sex" column="sex" jdbcType="BIT"/>
+        <result property="sex" column="sex" jdbcType="BIT" javaType="boolean"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="city" column="city" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
@@ -19,12 +19,12 @@
      uname,sex,phone,city,email,user_level,remark,updated_by,updated_at,created_at,created_by
     </sql>
 
-    <select id="singleQueryByPrimaryKeyService" resultType="com.market.stock.model.User">
+    <select id="singleQueryByPrimaryKeyService" resultMap="resultMap">
         select uid,
         <include refid="base_column"/>
         from yms_user_info where uid=#{uid}
     </select>
-    <select id="queryListService">
+    <select id="queryListService" resultMap="resultMap">
         select uid,
         <include refid="base_column"/>
         from yms_user_info

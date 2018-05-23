@@ -4,6 +4,8 @@
  */
 package com.market.stock.controller;
 
+import com.market.stock.annotation.AnnotationUtil;
+import com.market.stock.annotation.SayHiAnnotation;
 import com.market.stock.enums.RequestType;
 import com.market.stock.enums.TablesEnum;
 import com.market.stock.model.StockManagerRequest;
@@ -30,7 +32,9 @@ public class MenuController {
     private StockManagerService stockManagerService;
 
     @RequestMapping(value = "/add")
+    @SayHiAnnotation(word = "我是自定义注解", tag = "注解啦")
     public String addService() {
+        AnnotationUtil.getAnnotationService(MenuController.class);
         StockManagerRequest request = new StockManagerRequest();
         User user = new User();
         user.setCity("上海");
@@ -54,11 +58,13 @@ public class MenuController {
     public String selectSingleService() {
         StockManagerRequest request = new StockManagerRequest();
         User user = new User();
-        user.setUid(8);
+        user.setUid(13);
         request.setDataModel(user);
         request.setRequestType(RequestType.SingleQuery);
         request.setTablesEnum(TablesEnum.USER_TABLE);
         StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        User result = response.getResponseModel();
+        log.info("result:{}", result.toString());
         return "helloMenu";
     }
 
@@ -70,8 +76,9 @@ public class MenuController {
         request.setRequestType(RequestType.ListQuery);
         request.setTablesEnum(TablesEnum.USER_TABLE);
         StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
-        List<User> list= (List<User>) response.getResponseModel();
-        log.info("查询到的结果数量:{}",list.size());
+        List<User> list = response.getResponseModel();
+        log.info("查询到的结果数量:{}", list.size());
+        log.info("result:{}", list.size());
         return "helloMenu";
     }
 
@@ -82,7 +89,7 @@ public class MenuController {
         user.setUid(9);
         user.setCity("上海");
         user.setCreatedAt(new Date());
-        user.setCreatedBy("萧何111");
+        user.setCreatedBy("萧何2222");
         user.setUpdatedAt(new Date());
         user.setUpdatedBy("李金鹏");
         user.setEmail("957143334@qq.com");
@@ -90,12 +97,16 @@ public class MenuController {
         user.setUname("王小飞11");
         user.setUserLevel("00");
         user.setPhone("18636853487");
+        user.setSex(false);
         request.setDataModel(user);
         request.setRequestType(RequestType.UPDATE);
         request.setTablesEnum(TablesEnum.USER_TABLE);
         StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        Integer result = response.getResponseModel();
+        log.info("result:{}", result);
         return "helloMenu";
     }
+
     @RequestMapping(value = "/del")
     public String deleteService() {
         StockManagerRequest request = new StockManagerRequest();
@@ -105,6 +116,8 @@ public class MenuController {
         request.setRequestType(RequestType.DELETE);
         request.setTablesEnum(TablesEnum.USER_TABLE);
         StockManagerResponse response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        Integer result = response.getResponseModel();
+        log.info("result:{}", result);
         return "helloMenu";
     }
 }

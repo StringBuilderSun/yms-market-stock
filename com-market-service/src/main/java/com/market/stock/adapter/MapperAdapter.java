@@ -57,7 +57,7 @@ public class MapperAdapter {
      */
     @Transactional
     //目前事务存在无效性
-    public <T> T getResult(StockBaseRequest request) {
+    public  <T> T getResult(StockBaseRequest request) {
         log.info("操作表:{} 请求类型:{}", request.getTablesEnum(), request.getRequestType());
         BaseMapper mapper = getMapper(request);
         if (mapper == null) {

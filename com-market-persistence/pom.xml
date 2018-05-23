@@ -15,10 +15,10 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.yms.market</groupId>
-            <artifactId>com.market.common</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.yms.market</groupId>-->
+            <!--<artifactId>com.market.common</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
