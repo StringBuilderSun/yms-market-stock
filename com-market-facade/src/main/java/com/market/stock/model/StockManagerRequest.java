@@ -3,9 +3,8 @@ package com.market.stock.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import java.sql.Date;
+
 
 /**
  * 库管理请求model
@@ -21,7 +20,7 @@ public class StockManagerRequest extends StockBaseRequest {
     /**
      * 操作时间
      */
-    private Date operatorTime;
+    private String operatorTime;
 
     public String ToString()
     {

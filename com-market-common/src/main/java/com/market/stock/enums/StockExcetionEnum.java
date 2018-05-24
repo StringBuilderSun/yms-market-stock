@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum StockExcetionEnum {
+    SUCCESS("000000","处理成功"),
     TABLE_NOTEXIT("SYS999999", "数据库中不存在此表"),
     REQUES_TYPE_ISNULL("SYS999996", "requestType is not null"),
     REQUES_TYPE_ISEXIT("SYS999995", "requestType is not exit"),

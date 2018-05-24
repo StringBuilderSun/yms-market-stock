@@ -30,6 +30,7 @@
         <zkclient.version>0.1</zkclient.version>
         <zookeeper.version>3.4.7</zookeeper.version>
         <dubbo.version>2.5.3</dubbo.version>
+        <com.yms.ltd>1.0.0</com.yms.ltd>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -52,6 +53,11 @@
                 <groupId>com.yms.market</groupId>
                 <artifactId>com.market.service</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yms.ltd</groupId>
+                <artifactId>yms.utils</artifactId>
+                <version>${com.yms.ltd}</version>
             </dependency>
             <!-- spring -->
             <dependency>
@@ -229,6 +235,10 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yms.ltd</groupId>
+            <artifactId>yms.utils</artifactId>
         </dependency>
     </dependencies>
 

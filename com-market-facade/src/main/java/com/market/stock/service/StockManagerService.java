@@ -1,6 +1,7 @@
 package com.market.stock.service;
 import com.market.stock.model.StockManagerRequest;
 import com.market.stock.model.StockManagerResponse;
+import com.yms.utils.dubbo.DubboResult;
 
 /**
  * 产品服务 提供产品管理接口
@@ -8,5 +9,5 @@ import com.market.stock.model.StockManagerResponse;
  */
 public interface StockManagerService {
 
-    StockManagerResponse StockDataBaseService(StockManagerRequest requestModel, String traceLogId);
+   DubboResult<StockManagerResponse> StockDataBaseService(StockManagerRequest requestModel, String traceLogId);
 }
