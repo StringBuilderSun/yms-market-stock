@@ -52,8 +52,9 @@ public class MenuController {
         request.setRequestType(RequestType.INSERT);
         request.setTablesEnum(TablesEnum.USER_TABLE);
         DubboResult<StockManagerResponse> response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
+        log.info("本次请求完毕啦.....{}", response.getResult().getResponseModel());
         return "helloMenu";
     }
-    
+
 }
 

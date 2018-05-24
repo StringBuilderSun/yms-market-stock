@@ -30,19 +30,17 @@ public class StockManagerServiceImpl implements StockManagerService {
         StockManagerResponse response = new StockManagerResponse();
         log.info("省略一堆业务处理啦...........");
         try {
-
             response.setResponseModel(mapperAdapter.getResult(requestModel));
             response.setResponseCode(ResultStatusEnum.SUCCESS.getResponseCode());
             response.setResponseDesc(ResultStatusEnum.SUCCESS.getResponseDesc());
             log.info("业务处理完毕啦.............");
-
         } catch (StockException e) {
             log.error("StockExceptation：", e);
             response.setResponseCode(e.getErrorCode());
             response.setResponseDesc(e.getErrorMessage());
             response.setResult(false);
         }
-
+        log.info("服务响应结果:{}", requestModel.getDataModel());
         return new DubboResult<StockManagerResponse>(response);
     }
 }

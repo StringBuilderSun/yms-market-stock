@@ -17,7 +17,7 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<File>d:/mylogs/yms-market-stock.log</File>
+		<File>/data/appLogs/yms-market-stock.log</File>
 		<encoder>
 			<Pattern>[%date{yyyy-MM-dd HH:mm:ss}][%-5level][%C{40}][%line][%M] --%mdc{client} [%X{TRACE_LOG_ID}] %msg%n</Pattern>
 			<charset>UTF-8</charset>
@@ -25,7 +25,7 @@
 		<!-- 配置滚动的策略 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!--按天回滚-->
-			<fileNamePattern>d:/mylogs/yms-market-stock.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>/data/appLogs/yms-market-stock.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<!--保留最大日志历史纪录为30天-->
 			<maxHistory>30</maxHistory>
 			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
