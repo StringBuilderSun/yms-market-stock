@@ -59,8 +59,8 @@
 	<logger name="java.sql.Connection" level="${logger.outside.logLevel}"/>
 	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="${logger.outside.logLevel}"/>
 	<logger name="org.jdbcdslog" level="${logger.outside.logLevel}" />
-
-	<logger name="com.market.stock" level="${logger.logLevel}" >
+	<logger name="org.apache.zookeeper" additivity="true" level="INFO" />
+	<logger name="com.market.stock" level="INFO" >
 		<!--该包名下的日志会异步打印-->
 		<appender-ref ref="asyncFile"/>
 	</logger>

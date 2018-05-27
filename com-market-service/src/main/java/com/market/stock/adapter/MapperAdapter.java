@@ -59,6 +59,7 @@ public class MapperAdapter {
     //目前事务存在无效性
     public  <T> T getResult(StockBaseRequest request) {
         log.info("操作表:{} 请求类型:{}", request.getTablesEnum(), request.getRequestType());
+        T result;
         BaseMapper mapper = getMapper(request);
         if (mapper == null) {
             log.error("mapper 接口不存在");

@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class StockBaseResponse implements Serializable {
     private static final long serialVersionUID = -7302365661744269058L;
     /**
-     * 本次表操作是否成功
+     * 本次表操作是否成功 查无此结果也返回false
      */
     private boolean result;
     /**
