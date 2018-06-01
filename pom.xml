@@ -31,6 +31,7 @@
         <zookeeper.version>3.4.7</zookeeper.version>
         <dubbo.version>2.5.3</dubbo.version>
         <com.yms.ltd>1.0.0</com.yms.ltd>
+        <bestpay.kafka.version>0.2.8</bestpay.kafka.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -59,6 +60,13 @@
                 <artifactId>yms.utils</artifactId>
                 <version>${com.yms.ltd}</version>
             </dependency>
+            <!-- bestpay-kafka -->
+            <dependency>
+                <groupId>com.bestpay.kafka</groupId>
+                <artifactId>kafka-service</artifactId>
+                <version>${bestpay.kafka.version}</version>
+            </dependency>
+
             <!-- spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
