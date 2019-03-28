@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.market.stock.mapper.OrderMapper">
+    <resultMap id="resultMap" type="com.market.stock.model.DTO.Order">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="orderno" column="orderno" jdbcType="VARCHAR"/>
+        <result property="userid" column="userid" jdbcType="INTEGER" javaType="int"/>
+        <result property="productid" column="productid" jdbcType="VARCHAR"/>
+        <result property="amount" column="count" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="createdate" column="createdate" jdbcType="DATE"/>
+        <result property="mchntid" column="mchntid" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="base_column">
+     orderno,userid,productid,amount,price,createdate,mchntid,remark
+    </sql>
+
+    <select id="singleQueryByPrimaryKeyService" resultMap="resultMap">
+        select id,
+        <include refid="base_column"/>
+        from yms_trans_order where id=#{id}
+    </select>
+    <select id="queryListService" resultMap="resultMap">
+        select id,
+        <include refid="base_column"/>
+        from yms_trans_order
+        <where>
+            <if test="id !=null and id !=''">
+                id=#{uid},
+            </if>
+            <if test="orderno !=null and orderno !=''">
+                orderno=#{orderno,jdbcType=VARCHAR},
+            </if>
+            <if test="productid !=null and productid != ''">
+                productid=#{productid jdbcType=BIT},
+            </if>
+            <if test="amount !=null and amount !=''">
+                amount=#{amount},
+            </if>
+            <if test="price !=null and price !=''">
+                price=#{price},
+            </if>
+            <if test="createdate !=null and createdate !=''">
+                createdate=#{createdate},
+            </if>
+            <if test="mchntid !=null and mchntid !=''">
+                mchntid=#{mchntid},
+            </if>
+            <if test="remark !=null and remark !=''">
+                remark=#{remark},
+            </if>
+        </where>
+    </select>
+    <insert id="addService">
+        insert into yms_trans_order (<include refid="base_column"/>)
+        values(
+        #{orderno,jdbcType=VARCHAR},
+        #{userid,jdbcType=INTEGER},
+        #{productid,jdbcType=VARCHAR},
+        #{amount,jdbcType=VARCHAR},
+        #{price,jdbcType=DECIMAL},
+        #{createdate,jdbcType=VARCHAR},
+        #{mchntid,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}
+        );
+    </insert>
+    <update id="updateService">
+        UPDATE yms_trans_order
+        <set>
+
+            <if test="orderno !=null and orderno!=''">
+                uname=#{orderno,jdbcType=VARCHAR},
+            </if>
+            <if test="userid !=null and userid!=''">
+                userid=#{userid,jdbcType=INTEGER},
+            </if>
+            <if test="productid !=null and productid != ''">
+                productid=#{productid jdbcType=VARCHAR},
+            </if>
+            <if test="amount !=null and amount !=''">
+                amount=#{amount},
+            </if>
+            <if test="price !=null and price !=''">
+                price=#{price},
+            </if>
+            <if test="createdate !=null and createdate !=''">
+                createdate=#{createdate},
+            </if>
+            <if test="mchntid !=null and mchntid !=''">
+                mchntid=#{mchntid},
+            </if>
+            <if test="remark !=null and remark !=''">
+                remark=#{remark},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteService">
+        DELETE  from yms_trans_order  where id=#{id}
+    </delete>
+
+
+</mapper>

@@ -5,12 +5,12 @@ import com.market.stock.enums.StockExcetionEnum;
 import com.market.stock.enums.TablesEnum;
 import com.market.stock.exception.StockException;
 import com.market.stock.mapper.BaseMapper;
+import com.market.stock.mapper.OrderMapper;
 import com.market.stock.mapper.UserMapper;
 import com.market.stock.model.StockBaseRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
@@ -21,7 +21,8 @@ import org.springframework.util.StringUtils;
 public class MapperAdapter {
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private OrderMapper orderMapper;
     /**
      * 获取mapper 接口
      *
@@ -40,6 +41,9 @@ public class MapperAdapter {
             case USER_TABLE:
                 mapper = userMapper;
                 break;
+            case ORDER_TABLE:
+                mapper=orderMapper;
+                break;
             default:
                 mapper = null;
         }
@@ -55,11 +59,8 @@ public class MapperAdapter {
      * @param <T>     操作结果
      * @return
      */
-    @Transactional
-    //目前事务存在无效性
-    public  <T> T getResult(StockBaseRequest request) {
+    public <T> T getResult(StockBaseRequest request) {
         log.info("操作表:{} 请求类型:{}", request.getTablesEnum(), request.getRequestType());
-        T result;
         BaseMapper mapper = getMapper(request);
         if (mapper == null) {
             log.error("mapper 接口不存在");
@@ -90,4 +91,6 @@ public class MapperAdapter {
 
         }
     }
+
+
 }

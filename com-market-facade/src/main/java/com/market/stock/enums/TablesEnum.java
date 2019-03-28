@@ -7,5 +7,9 @@ public enum TablesEnum {
     /**
      * 用户表
      */
-    USER_TABLE;
+    USER_TABLE,
+    /**
+     * 订单表
+     */
+    ORDER_TABLE;
 }

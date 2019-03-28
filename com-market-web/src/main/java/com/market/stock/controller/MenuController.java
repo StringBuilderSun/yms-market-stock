@@ -4,23 +4,20 @@
  */
 package com.market.stock.controller;
 
-import com.market.stock.annotation.AnnotationUtil;
 import com.market.stock.annotation.SayHiAnnotation;
-import com.market.stock.enums.RequestType;
-import com.market.stock.enums.TablesEnum;
-import com.market.stock.model.DTO.User;
-import com.market.stock.model.StockManagerRequest;
-import com.market.stock.model.StockManagerResponse;
-import com.market.stock.service.StockManagerService;
-import com.yms.utils.dubbo.DubboResult;
+import com.market.stock.model.DTO.Order;
+import com.market.stock.service.UserOrderService;
+import com.market.stock.utils.AddUserTask;
+import com.market.stock.serviceImpl.StockManagerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lijinpeng
@@ -31,30 +28,37 @@ import java.util.UUID;
 public class MenuController {
     @Autowired
     private StockManagerService stockManagerService;
+    @Autowired
+    private UserOrderService orderService;
 
     @RequestMapping(value = "/add")
     @SayHiAnnotation(word = "我是自定义注解", tag = "注解啦")
     public String addService() {
-        AnnotationUtil.getAnnotationService(MenuController.class);
-        StockManagerRequest request = new StockManagerRequest();
-        User user = new User();
-        user.setCity("上海");
-        user.setCreatedAt(new Date());
-        user.setCreatedBy("李金鹏");
-        user.setUpdatedAt(new Date());
-        user.setUpdatedBy("李金鹏");
-        user.setEmail("957143335@qq.com");
-        user.setRemark("备注啦");
-        user.setUname("王小飞");
-        user.setUserLevel("00");
-        user.setPhone("18939573486");
-        request.setDataModel(user);
-        request.setRequestType(RequestType.INSERT);
-        request.setTablesEnum(TablesEnum.USER_TABLE);
-        DubboResult<StockManagerResponse> response = stockManagerService.StockDataBaseService(request, UUID.randomUUID().toString());
-        log.info("本次请求完毕啦.....{}", response.getResult().getResponseModel());
+//        ExecutorService executorService = Executors.newFixedThreadPool(100);
+//        for (int i = 0; i < 500000; i++) {
+//            if(i%50==0)
+//            {
+//                try {
+//                    TimeUnit.MILLISECONDS.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            executorService.submit(new AddUserTask(stockManagerService));
+//        }
+        Order newOrder = new Order();
+        newOrder.setRemark("测试订单");
+        newOrder.setAmount(20000);
+        newOrder.setCreatedate(new Date());
+        newOrder.setMchntid("10001");
+        newOrder.setOrderno("2018091212312");
+        newOrder.setProductid("100002");
+        newOrder.setUserid(20);
+        newOrder.setPrice(100.0);
+        orderService.addUserAndSaveOrder(newOrder);
         return "helloMenu";
     }
+
 
 }
 

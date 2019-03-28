@@ -1,4 +1,4 @@
-package com.market.stock.service;
+package com.market.stock.serviceImpl;
 import com.market.stock.model.StockManagerRequest;
 import com.market.stock.model.StockManagerResponse;
 import com.yms.utils.dubbo.DubboResult;

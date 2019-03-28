@@ -1,12 +1,9 @@
-package com.market.stock.service;
+package com.market.stock.serviceImpl;
 
 import com.market.stock.adapter.MapperAdapter;
 
-import com.market.stock.enums.RequestType;
 import com.market.stock.enums.ResultStatusEnum;
-import com.market.stock.enums.StockExcetionEnum;
 import com.market.stock.exception.StockException;
-import com.market.stock.model.StockBaseResponse;
 import com.market.stock.model.StockManagerRequest;
 import com.market.stock.model.StockManagerResponse;
 import com.yms.utils.dubbo.DubboResult;

@@ -16,6 +16,6 @@
     <dubbo:protocol name="dubbo" port="20880"/>
 
     <!-- 用户服务接口 -->
-    <dubbo:service   interface="com.market.stock.service.StockManagerService"  timeout="3000"  ref="stockManagerServiceImpl"/>
+    <dubbo:service interface="com.market.stock.serviceImpl.StockManagerService" timeout="3000" ref="stockManagerServiceImpl"/>
 
 </beans>
