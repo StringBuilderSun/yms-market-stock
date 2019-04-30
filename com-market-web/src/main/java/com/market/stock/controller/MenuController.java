@@ -7,7 +7,6 @@ package com.market.stock.controller;
 import com.market.stock.annotation.SayHiAnnotation;
 import com.market.stock.model.DTO.Order;
 import com.market.stock.service.UserOrderService;
-import com.market.stock.utils.AddUserTask;
 import com.market.stock.serviceImpl.StockManagerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author lijinpeng
@@ -34,18 +30,6 @@ public class MenuController {
     @RequestMapping(value = "/add")
     @SayHiAnnotation(word = "我是自定义注解", tag = "注解啦")
     public String addService() {
-//        ExecutorService executorService = Executors.newFixedThreadPool(100);
-//        for (int i = 0; i < 500000; i++) {
-//            if(i%50==0)
-//            {
-//                try {
-//                    TimeUnit.MILLISECONDS.sleep(100);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            executorService.submit(new AddUserTask(stockManagerService));
-//        }
         Order newOrder = new Order();
         newOrder.setRemark("测试订单");
         newOrder.setAmount(20000);
@@ -58,7 +42,5 @@ public class MenuController {
         orderService.addUserAndSaveOrder(newOrder);
         return "helloMenu";
     }
-
-
 }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:redisson="http://redisson.org/schema/redisson"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://redisson.org/schema/redisson
+       http://redisson.org/schema/redisson/redisson.xsd">
+
+    <bean name="stringCode" class="org.redisson.client.codec.StringCodec"/>
+    <redisson:client codec-ref="stringCode" >
+        <redisson:cluster-servers >
+            <redisson:node-address value="redis://${redis_host1}"/>
+            <redisson:node-address value="redis://${redis_host2}"/>
+            <redisson:node-address value="redis://${redis_host3}"/>
+            <redisson:node-address value="redis://${redis_host4}"/>
+            <redisson:node-address value="redis://${redis_host5}"/>
+            <redisson:node-address value="redis://${redis_host6}"/>
+        </redisson:cluster-servers>
+    </redisson:client>
+</beans>

@@ -50,5 +50,4 @@ public class Order {
      */
     private String mchntid;
 
-
 }
